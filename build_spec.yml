@@ -14,7 +14,7 @@ steps:
   - type: Command
     name: "Dockerize"
     command: |
-      docker build -t flask_ex:${tag}
+      docker build . -t flask_ex:${tag}
       docker run flask_ex:${tag} > flask_app_result.txt
       version=`cat ./version.txt`
 
