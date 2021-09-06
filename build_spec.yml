@@ -15,14 +15,10 @@ steps:
     name: "Dockerize"
     command: |
       docker build . -t flask_ex:${tag}
-      docker run flask_ex:${tag} > flask_app_result.txt
       version=`cat ./version.txt`
 
 outputArtifacts:
   - name: flask_python
     type: DOCKER_IMAGE
     location: flask_ex:1.1
-  - name: flask_app_result
-    type: BINARY
-    location: flask_app_result.txt
 
