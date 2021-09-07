@@ -14,8 +14,14 @@ steps:
   - type: Command
     name: "Dockerize the python application"
     command: |
-      docker build . -t python_flask_ex:${tag}
+      docker build -t python_flask_ex:${tag} .
       version=`cat ./version.txt`
+    onFailure:
+      - type: Command
+        command: |
+          echo "Docker Image creation failed"
+        timeoutInSeconds: 600
+        runAs: root
 
 outputArtifacts:
   - name: flask_python
