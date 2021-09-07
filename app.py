@@ -22,7 +22,7 @@ def kilogram_from(pound):
     """Convert Weight in Pounds to Weight in Kilograms."""
     try:
         kilogram = float(pound) * 0.454
-        kilogram = round(kilogram, 2)  # Round to three decimal places
+        kilogram = round(kilogram, 3) 
         return str(kilogram)
     except ValueError:
         return "invalid input"
