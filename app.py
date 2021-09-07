@@ -5,26 +5,26 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    celsius = request.args.get("celsius", "")
-    if celsius:
-        fahrenheit = fahrenheit_from(celsius)
+    pound = request.args.get("pound", "")
+    if pound:
+        kilogram = kilogram_from(pound)
     else:
-        fahrenheit = ""
+        kilogram = ""
     return (
         """<form action="" method="get">
-                Celsius temperature: <input type="text" name="celsius">
-                <input type="submit" value="Convert to Fahrenheit">
+                Weight in pounds: <input type="text" name="pound">
+                <input type="submit" value="Convert to Kilograms">
             </form>"""
-        + "Fahrenheit: "
-        + fahrenheit
+        + "Weight in Kilograms: "
+        + kilogram
     )
 
-def fahrenheit_from(celsius):
-    """Convert Celsius to Fahrenheit degrees."""
+def kilogram_from(pound):
+    """Convert Weight in Pounds to Weight in Kilograms."""
     try:
-        fahrenheit = float(celsius) * 9 / 5 + 32
-        fahrenheit = round(fahrenheit, 3)  # Round to three decimal places
-        return str(fahrenheit)
+        kilogram = float(pound) * 0.454
+        kilogram = round(kilogram, 3)  # Round to three decimal places
+        return str(kilogram)
     except ValueError:
         return "invalid input"
 
