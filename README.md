@@ -40,6 +40,24 @@ docker run -d -p 5000:5000 python-flask-example:latest
 And open your browser to http://127.0.0.1:5000/ 
 
 
+## Build and test the app in OCI DevOps
+
+Now that you've seen how you can locally build and test this app, let's build our CI/CD pipeline in OCI DevOps Service.
+
+### Create External Connection to your Git repository 
+
+1. Create a [DevOps Project](https://docs.oracle.com/en-us/iaas/Content/devops/using/devops_projects.htm) or use and an existing project. 
+2. Create an External Connection to your Github repoistory in your DevOps project.
+   - Create a Personal Access Token (PAT): https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
+   - In the OCI Console, Go to Identity & Security -> Vault and create a [Vault]( https://docs.oracle.com/en-us/iaas/Content/KeyManagement/Concepts/keyoverview.htm) in compartment of your own choice.
+   - Create a Master Key that will be used to encrypt the PATs. 
+   - Select Secrets from under Resources and create a secret using PAT obtained from Github account.
+   - Make a note of the OCID of the secret.
+   - Now, go to the desired project and select External Connection from the resources.
+   - Select type as Github and provide OCID of the secret under Personal Access Token.
+   - Finally, allow Build Service (dynamic group with DevOps Resources) to use a PAT secret by writing a policy in the root compartment as: ``` Allow dynamic-group dg-with-devops-resources to manage secret-family in tenancy```
+
+
 
 
 
