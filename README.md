@@ -20,7 +20,8 @@ Open a terminal and test out the python Flask web app example which acts as a si
 2. Setup python3 virtual environment : ``` python3 -m venv venv ```
 3. Activate the virtual environment : ```source venv/bin/activate ``` 
 4. Install requirements (Flask) : ``` python3 -m pip install -r requirements.txt ```
-5. Start the flask app : ``` python app.py ```
+5. Start the flask app : ``` python3 app.py ```
+6. Verify the app locally : open your browser to http://127.0.0.1:8080 or whatever port you set, if you've changed the local port 
 
 
 
