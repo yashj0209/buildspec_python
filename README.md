@@ -71,8 +71,6 @@ In your Build Pipeline, first add a Managed Build stage.
    - Select external connection you created above
    - Give the repo URL to the repo which contains build_spec.yml file.
    - Select main branch.
-    - The Name of your Primary Code Repository is used in the build_spec.yaml. In this example, you will need to use the name node_express for the build_spec.yaml  instructions to acess this source code
-    - Select the main branch
 
 #### Create a Container Registry repository
 
