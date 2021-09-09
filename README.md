@@ -21,7 +21,24 @@ Open a terminal and test out the python Flask web app example which acts as a si
 3. Activate the virtual environment : ```source venv/bin/activate ``` 
 4. Install requirements (Flask) : ``` python3 -m pip install -r requirements.txt ```
 5. Start the flask app : ``` python3 app.py ```
-6. Verify the app locally : open your browser to http://127.0.0.1:8080 or whatever port you set, if you've changed the local port 
+6. Verify the app locally : open your browser to http://127.0.0.1:8080/ or whatever port you set, if you've changed the local port.
+
+### Build a container image for the App
+You can locally build a container image using docker, to verify that you can run the app within a container.
+
+```
+docker build -t python-flask-example .
+```
+
+Verify the image was was built, by listing the images using ``` docker image ls```
+
+Now, run your local container and confirm you can access the web app running in the container
+```
+docker run -d -p 5000:5000 python-flask-example:latest
+```
+
+And open your browser to http://127.0.0.1:5000/ 
+
 
 
 
