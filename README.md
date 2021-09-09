@@ -47,7 +47,7 @@ Now that you've seen how you can locally build and test this app, let's build ou
 ### Create External Connection to your Git repository 
 
 1. Create a [DevOps Project](https://docs.oracle.com/en-us/iaas/Content/devops/using/devops_projects.htm) or use and an existing project. 
-2. Create an External Connection to your Github repoistory in your DevOps project.
+2. Create an External Connection to your Github repository in your DevOps project.
    - Create a Personal Access Token (PAT): https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
    - In the OCI Console, Go to Identity & Security -> Vault and create a [Vault]( https://docs.oracle.com/en-us/iaas/Content/KeyManagement/Concepts/keyoverview.htm) in compartment of your own choice.
    - Create a Master Key that will be used to encrypt the PATs. 
@@ -109,7 +109,7 @@ Use the Manual Run button to start a Build Run
 
 Manual Run will use the Primary Code Repository, will start the Build Pipeline, first running the Managed Build stage, followed by the Deliver Artifacts stage.
 
-After the Build Pipeline execution is complete, we can view the container image stored in the OCI Conatiner Registry, which can then be pulled to local workspace (Under ```Actions``` , choose ``` Copy Pull Command```).
+After the Build Pipeline execution is complete, we can view the container image stored in the OCI Container Registry, which can then be pulled to local workspace (Under ```Actions``` , choose ``` Copy Pull Command```).
 
 
 
