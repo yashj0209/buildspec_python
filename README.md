@@ -14,6 +14,14 @@ cd buildspec_python
 ```
 
 ### Install the Requirements and Run the App
+Open a terminal and test out the python Flask web app example which acts as a simple weight metric convertor.
+
+1. Downlaod and install python(3.x or higher): https://www.python.org/downloads/
+2. Setup python3 virtual environment : ``` python3 -m venv venv ```
+3. Activate the virtual environment : ```source venv/bin/activate ``` 
+4. Install requirements (Flask) : ``` python3 -m pip install -r requirements.txt ```
+5. Start the flask app : ``` python app.py ```
+
 
 
 
