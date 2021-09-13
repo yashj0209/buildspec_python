@@ -75,7 +75,7 @@ In your Build Pipeline, first add a Managed Build stage.
 #### Create a Container Registry repository
 
 Create a [Container Registry repository](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrycreatingarepository.htm) for the python-flask-example container image built in the Managed Build stage.
-1. You can name the repo: ```python-flask-example```. So if you create the repository in the Ashburn region, the path to the repo will be REGION/TENANCY-NAMESPACE/python-flask-example
+1. You can name the repo: ```python-flask-example```. The path to the repo will be REGION/TENANCY-NAMESPACE/python-flask-example
 2. To pull the container image without authorization, set the repository access to public. Under "Actions", choose ```Change to public```.
 
 #### Create a DevOps Artifact for your container image repository
