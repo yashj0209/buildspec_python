@@ -43,13 +43,13 @@ steps:
     command: |
       # 'Source1' in the below command is one of the build source name
       cd source1
-      mvn clean install
+      echo "inside source 1"
       # Navigating to Source2 repository. 'Source2' in the below command is one of the build source name.
       cd source2
-      mvn clean install
+      echo "inside source 2"
       # Navigating to the primary source repository.
       cd $OCI_PRIMARY_SOURCE_DIR
-      mvn clean install
+      echo "inside primary"
       
     onFailure:
        - type: Command
