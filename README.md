@@ -55,7 +55,7 @@ Now that you've seen how you can locally build and test this app, let's build ou
    - Make a note of the OCID of the secret.
    - Now, go to the desired project and select External Connection from the resources.
    - Select type as Github and provide OCID of the secret under Personal Access Token.
-   - Finally, allow Build Service (dynamic group with DevOps Resources) to use PAT secret by writing a policy in the root compartment as: ``` Allow dynamic-group dg-with-devops-resources to manage secret-family in tenancy```
+   - Finally, allow Build Pipeline (dynamic group with DevOps Resources) to use PAT secret by writing a policy in the root compartment as: ``` Allow dynamic-group dg-with-devops-resources to manage secret-family in tenancy```
 
 ### Setup your Build Pipeline
 
@@ -76,9 +76,11 @@ In your Build Pipeline, first add a Managed Build stage.
 
 Create a [Container Registry repository](https://docs.oracle.com/en-us/iaas/Content/Registry/Tasks/registrycreatingarepository.htm) for the python-flask-example container image built in the Managed Build stage.
 1. You can name the repo: ```python-flask-example```. The path to the repo will be REGION/TENANCY-NAMESPACE/python-flask-example
-2. To pull the container image without authorization, set the repository access to public. Under "Actions", choose ```Change to public```.
+2. By default, the repository access is set to private. Policies can be added to manage access to the repository.
 
 #### Create a DevOps Artifact for your container image repository
+
+Reference :  https://docs.oracle.com/en-us/iaas/Content/devops/using/containerimage_repository_artifact.htm
 
 The version of the container image that will be delivered to the OCI repository is defined by a parameter in the Artifact URI that matches a Build Spec File exported variable (the variable ```version``` in this example) or Build Pipeline parameter name.
 
@@ -89,17 +91,26 @@ In the project, under Artifacts, create a DevOps Artifact to point to the Contai
 3. Path: REGION/TENANCY-NAMESPACE/python-flask-example
 4. Replace parameters: Yes, substitute placeholders
 
+<img src="create_artifact.png" />
+
+Required policies must be added in the root compartment for the Container Registry repository and DevOps Artifact resource.
+1. Provide access to OCIR to deliver artifacts : ```Allow dynamic-group dg-with-devops-resources to manage repos in tenancy```
+2. Provide access to read deploy artifacts in deliver artifact stage : ```Allow dynamic-group dg-with-devops-resources to manage devops-family in tenancy```
+
 #### Add a Deliver Artifacts stage
 
 Let's add a Deliver Artifacts stage to your Build Pipeline to deliver the ```python-flask-example``` container to an OCI repository.
 
-The Deliver Artifacts stage maps the output Artifacts from the Managed Build stage with the version to deliver to a DevOps Artifact resource, and then to the OCI repository (OCIR).
+The Deliver Artifacts stage maps the output Artifacts from the Managed Build stage with the version to deliver to OCI Repository (OCIR) through the DevOps Artifact resource.
 
 Add a Deliver Artifacts stage to your Build Pipeline after the Managed Build stage. To configure this stage:
 
 1. In your Deliver Artifacts stage, choose ```Select Artifact```
 2. From the list of artifacts select the ```python-flask-example container``` artifact that you created above
+<img src="select_artifact.png" />
+
 3. Assign the container image outputArtifact from the ```build_spec.yml``` to the DevOps project artifact. For the "Build config/result Artifact name" enter: ```flask_python``` (This name should be the same as the one mentioned in the outputArtifact section of the build_spec.yml file).
+<img src="deliver_artifact_stage_full.png" />
 
 ### Run your Build in OCI DevOps
 
@@ -109,10 +120,4 @@ Use the Manual Run button to start a Build Run
 
 Manual Run will use the Primary Code Repository, will start the Build Pipeline, first running the Managed Build stage, followed by the Deliver Artifacts stage.
 
-After the Build Pipeline execution is complete, we can view the container image stored in the OCI Container Registry, which can then be pulled to local workspace (Under ```Actions``` , choose ``` Copy Pull Command```).
-
-
-
-
-
-
+After the Build Pipeline execution is complete, we can view the container image stored in the OCI Container Registry, which can then be pulled to local workspace, if access is allowed to the user (Under ```Actions``` , choose ``` Copy Pull Command```) 
