@@ -45,10 +45,13 @@ steps:
       cd ${OCI_WORKSPACE_DIR}/source1
       echo "inside source 1"
       ls
+      docker build -t python_flask_ex:1.0 .
+      docker image ls
       # Navigating to Source2 repository. 'Source2' in the below command is one of the build source name.
       cd ${OCI_WORKSPACE_DIR}/source2
       echo "inside source 2"
       ls
+      gem install bundler
       # Navigating to the primary source repository.
       cd ${OCI_PRIMARY_SOURCE_DIR}
       echo "inside primary"
