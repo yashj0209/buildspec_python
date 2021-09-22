@@ -42,14 +42,17 @@ steps:
     timeoutInSeconds: 400
     command: |
       # 'Source1' in the below command is one of the build source name
-      cd source1
+      cd ${OCI_WORKSPACE_DIR}/source1
       echo "inside source 1"
+      ls
       # Navigating to Source2 repository. 'Source2' in the below command is one of the build source name.
-      cd source2
+      cd ${OCI_WORKSPACE_DIR}/source2
       echo "inside source 2"
+      ls
       # Navigating to the primary source repository.
-      cd $OCI_PRIMARY_SOURCE_DIR
+      cd ${OCI_PRIMARY_SOURCE_DIR}
       echo "inside primary"
+      ls
       
     onFailure:
        - type: Command
