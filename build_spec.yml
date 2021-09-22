@@ -1,29 +1,61 @@
+#version: 0.1
+#component: build
+#timeoutInSeconds: 4000
+#runAs: root
+#shell: bash
+#env:
+#  variables:
+#    tag : "1.0"
+#  exportedVariables:
+#    - tag
+#    - version
+
+#steps:
+#  - type: Command
+#    name: "Dockerize the python application"
+#    command: |
+#      docker build -t python_flask_ex:${tag} .
+#      version=`cat ./version.txt`
+#    onFailure:
+#      - type: Command
+#        command: |
+#          echo "Docker Image creation failed"
+#        timeoutInSeconds: 4000
+#        runAs: root
+
+#outputArtifacts:
+#  - name: flask_python
+#    type: DOCKER_IMAGE
+#    location: python_flask_ex:1.0
+
+# commenting above part out just for bug-bash
+
 version: 0.1
 component: build
-timeoutInSeconds: 4000
+timeoutInSeconds: 6000
 runAs: root
 shell: bash
-env:
-  variables:
-    tag : "1.0"
-  exportedVariables:
-    - tag
-    - version
 
 steps:
   - type: Command
-    name: "Dockerize the python application"
+    name: "Build Source"
+    timeoutInSeconds: 400
     command: |
-      docker build -t python_flask_ex:${tag} .
-      version=`cat ./version.txt`
+      # 'Source1' in the below command is one of the build source name
+      cd source1
+      mvn clean install
+      # Navigating to Source2 repository. 'Source2' in the below command is one of the build source name.
+      cd source2
+      mvn clean install
+      # Navigating to the primary source repository.
+      cd $OCI_PRIMARY_SOURCE_DIR
+      mvn clean install
+      
     onFailure:
-      - type: Command
-        command: |
-          echo "Docker Image creation failed"
-        timeoutInSeconds: 4000
-        runAs: root
-
-outputArtifacts:
-  - name: flask_python
-    type: DOCKER_IMAGE
-    location: python_flask_ex:1.0
+       - type: Command
+         command: |
+           echo "execution failed in above step"
+         timeoutInSeconds: 400
+         runAs: root
+      
+      
