@@ -1,67 +1,67 @@
-#version: 0.1
-#component: build
-#timeoutInSeconds: 4000
-#runAs: root
-#shell: bash
-#env:
-#  variables:
-#    tag : "1.0"
-#  exportedVariables:
-#    - tag
-#    - version
-
-#steps:
-#  - type: Command
-#    name: "Dockerize the python application"
-#    command: |
-#      docker build -t python_flask_ex:${tag} .
-#      version=`cat ./version.txt`
-#    onFailure:
-#      - type: Command
-#        command: |
-#          echo "Docker Image creation failed"
-#        timeoutInSeconds: 4000
-#        runAs: root
-
-#outputArtifacts:
-#  - name: flask_python
-#    type: DOCKER_IMAGE
-#    location: python_flask_ex:1.0
-
-# commenting above part out just for bug-bash
-
 version: 0.1
 component: build
-timeoutInSeconds: 6000
+timeoutInSeconds: 4000
 runAs: root
 shell: bash
+env:
+  variables:
+    tag : "1.0"
+  exportedVariables:
+    - tag
+    - version
 
 steps:
   - type: Command
-    name: "Build Source"
-    timeoutInSeconds: 400
+    name: "Dockerize the python application"
     command: |
-      # 'Source1' in the below command is one of the build source name
-      cd ${OCI_WORKSPACE_DIR}/source1
-      echo "inside source 1"
-      ls
-      docker build -t python_flask_ex:1.0 .
-      docker image ls
-      # Navigating to Source2 repository. 'Source2' in the below command is one of the build source name.
-      cd ${OCI_WORKSPACE_DIR}/source2
-      echo "inside source 2"
-      ls
-      gem install bundler
-      # Navigating to the primary source repository.
-      cd ${OCI_PRIMARY_SOURCE_DIR}
-      echo "inside primary"
-      ls
-      
+      docker build -t python_flask_ex:${tag} .
+      version=`cat ./version.txt`
     onFailure:
-       - type: Command
-         command: |
-           echo "execution failed in above step"
-         timeoutInSeconds: 400
-         runAs: root
+      - type: Command
+        command: |
+          echo "Docker Image creation failed"
+        timeoutInSeconds: 4000
+        runAs: root
+
+outputArtifacts:
+  - name: flask_python
+    type: DOCKER_IMAGE
+    location: python_flask_ex:1.0
+
+# commenting above part out just for bug-bash
+
+#version: 0.1
+#component: build
+#timeoutInSeconds: 6000
+#runAs: root
+#shell: bash
+
+#steps:
+#  - type: Command
+#    name: "Build Source"
+#    timeoutInSeconds: 400
+#    command: |
+#      # 'Source1' in the below command is one of the build source name
+#      cd ${OCI_WORKSPACE_DIR}/source1
+#      echo "inside source 1"
+#      ls
+#      docker build -t python_flask_ex:1.0 .
+#      docker image ls
+#      # Navigating to Source2 repository. 'Source2' in the below command is one of the build source name.
+#      cd ${OCI_WORKSPACE_DIR}/source2
+#      echo "inside source 2"
+#      ls
+#      gem install bundler
+#      # Navigating to the primary source repository.
+#      cd ${OCI_PRIMARY_SOURCE_DIR}
+#      echo "inside primary"
+#      ls
+#      
+#    onFailure:
+#       - type: Command
+#         command: |
+#           echo "execution failed in above step"
+#         timeoutInSeconds: 400
+#         runAs: root
       
       
