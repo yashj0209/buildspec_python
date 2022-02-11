@@ -1,4 +1,4 @@
-# Getting Started with OCI DevOps
+<!---# Getting Started with OCI DevOps
 This is a sample project, using Python with Flask framework to create a simple weight convertor web application. With [OCI DevOps Service](https://www.oracle.com/devops/devops-service/) and this project, you'll be able to build this application and store it in [Oracle Container Registry](https://docs.oracle.com/en-us/iaas/Content/Registry/Concepts/registryoverview.htm) (OCIR).
 
 In this example, you'll build a container image of the Python Flask app, test it locally and push your built container to the OCI Container Registry (OCIR) using the OCI DevOps service.
@@ -120,4 +120,4 @@ Use the Manual Run button to start a Build Run
 
 Manual Run will use the Primary Code Repository, will start the Build Pipeline, first running the Managed Build stage, followed by the Deliver Artifacts stage.
 
-After the Build Pipeline execution is complete, we can view the container image stored in the OCI Container Registry, which can then be pulled to local workspace, if access is allowed to the user (Under ```Actions``` , choose ``` Copy Pull Command```) 
+After the Build Pipeline execution is complete, we can view the container image stored in the OCI Container Registry, which can then be pulled to local workspace, if access is allowed to the user (Under ```Actions``` , choose ``` Copy Pull Command```) --->
